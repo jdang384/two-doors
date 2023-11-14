@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+
+
+/* MAKING BACKGROUND USING THE DIV NAMED CONTAINER */
+body {
+  text-align: center;
+  margin: auto;
+/*   width: 1000px; */
+}
+div#container {
+  width: 100%;
+  height: 600px;
+  background: linear-gradient(to bottom right, purple, white);
+  font-family: 'Creepster';
+  font-size: 1.5em;
+}
+#image-container {
+/*   background-color: gray; */
+  position: relative;
+  height: 50vh;
+  width: 30vw;
+  margin: auto;
+  margin-top: 5px;
+  
+}
+
+div#main-content  {
+  display: none;
+}
+
+/* moving submit and creature*/
+#submit {
+  top: 50px;
+  left: 930px;  
+}
+img#creature {
+  position: absolute;
+  left: 240px;  
+  animation: shake 4s ease infinite;
+}
+
+/* POSITIONING SPIDER AND WEB */
+img#web {
+  position: absolute;
+  left: 170px;
+}
+img#spider {
+  position: absolute;
+  left: 170px;
+  animation: upDown 5s ease infinite
+}
+
+h2#hello-message {
+  display: none;
+  margin: 0;
+}
+
+div.door {
+  width: 150px;
+  height: 200px;
+  background-color: beige;
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc6rzAtNNjRVVA03Kg5WuUEfhTCPaltaTF1ZYl5VdvUyJLuC65UW5IJfokubWTuxVQ4Sg&usqp=CAU');
+    background-size: cover;
+  background-position: center center;
+ 
+}
+
+
+div.door-container {
+  display: inline-block;
+  margin: 1rem;
+  margin-top: 0;
+}
+
+/* ANIMATION FOR SPIDER */
+@keyframes upDown {
+  0% {
+    transform: translateY(0)
+  }
+  50% {
+    transform:translateY(50px)
+  }
+  100% {
+    transform: translateY(0)
+  }
+}
+/* ANIMATION FOR CREATURE */
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  0% {
+    transform: rotate(0deg);
+  }
+}
+    </style>
+</head>
+<body>
+    <div id="container">
+<h1 id="welcome">Welcome, you Gremlins!</h1>
+  
+  <div id="input-area">
+  <input id="name-input" placeholder="Enter your name" />
+  <button id="submit" type="button" onclick="sayHello()">Submit</button>
+  </div>
+  <h2 id="hello-message">Hello</h2>
+  
+<!--   GIVING ID TO WEB, SPIDER, CREATURE -->
+  <div id="image-container">
+  <img id="web" src="https://westmeccoding.github.io/spider-animation/halloween-spider-web.png" width=100 height=100 />
+  <img id="spider" src="https://westmeccoding.github.io/spider-animation/halloween-spider-noweb.png" width=100 height=100 />
+  <img id="creature" src="https://raw.githubusercontent.com/WestMecCoding/Scary_door_Choice/main/crypt-keeper.png" width=200 height=200 />
+  </div>
+  
+  <div id="main-content">
+    <div class="door-container">
+  <div class="door" id="left-door"></div><button id="choose-left" onclick="chooseRandomDoor('left')">Choose left</button>
+</div>
+
+<div class="door-container">
+  <div class="door" id="right-door"></div>
+  <button id="choose-right"onclick="chooseRandomDoor('right')">Choose right</button>
+</div>
+</div>
+</div>
+
+
+    <script>
+        const nameInput= document.getElementById('name-input');
+const welcome = document.getElementById("welcome");
+const helloMessage = document.getElementById('hello-message');
+const inputArea = document.getElementById('input-area');
+const leftDoor = document.getElementById("left-door");
+const rightDoor = document.getElementById("right-door");
+const mainContent = document.getElementById('main-content');
+
+
+function welcomeUser() {
+  const userName = nameInput.value
+}
+
+function getName() {
+  let playerName = nameInput.value;
+  console.log(playerName)
+  
+  mainContent.style.display = "block";
+  nameInput.style.display = "none";
+  nameButton.style.display = "none";
+}
+
+function sayHello() {
+const userName = nameInput.value;
+  console.log(userName);
+  helloMessage.textContent = "Hello " + userName + "!!!";
+  helloMessage.style.display = "block";
+  inputArea.style.display = "none";
+  mainContent.style.display = "block";   
+}
+
+function chooseRandomDoor(selection) {
+  let correctDoor = Math.floor(Math.random() * 2) + 1;
+
+  if (correctDoor == 1 && selection == "left") {
+    leftDoor.innerHTML = "<span>Winner!</span>";
+    leftDoor.style.backgroundImage = "url(https://imgflip.com/s/meme/Smiling-Cat.jpg)"
+    rightDoor.innerHTML = "<span>I was a monster</span>";
+    rightDoor.style.backgroundImage = "url(https://as2.ftcdn.net/v2/jpg/05/57/11/81/1000_F_557118159_RcFLaN3zlAxVmSrMo6pAaNP8txezEyHB.jpg)"  
+  } else if (correctDoor == 2 && selection == "right") {
+    rightDoor.innerHTML = "<span>Winner!</span>";
+    rightDoor.style.backgroundImage = "url(https://image.petmd.com/files/styles/863x625/public/CANS_dogsmiling_379727605.jpg)";
+    leftDoor.innerHTML = "<span>I was a monster</span>";
+    leftDoor.style.backgroundImage = "url(https://www.cesarsway.com/wp-content/uploads/2019/10/warning-signs-of-dog-depression-cesars-way.jpg)";   
+  } else {
+    rightDoor.innerHTML = "<span>I was a monster</span>";
+    rightDoor.style.backgroundImage = "url(https://i.pinimg.com/736x/76/60/70/76607040596297a414dd9ffaed95d44c.jpg)"
+    leftDoor.innerHTML = "<span>I was a monster</span>";
+    leftDoor.style.backgroundImage = "url(https://i.pinimg.com/736x/76/60/70/76607040596297a414dd9ffaed95d44c.jpg)"
+  }
+  
+}
+
+    </script>
+</body>
+</html>
